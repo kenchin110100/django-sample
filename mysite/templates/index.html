@@ -1,0 +1,64 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+	<script src="{% static 'js/jquery-1.10.2.js' %}"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+	<script src="{% static 'js/jquery-ui-1.10.3.custom.js' %}"></script>
+	<script src="{% static 'js/jquery.event.drag-2.2.js' %}"></script>
+    <script src="{% static 'js/jquery.narrows.min.js' %}"></script>
+	<script src="{% static 'js/hierselect.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/slick.grid.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/ui-lightness/jquery-ui-1.10.3.custom.css' %}"/>
+	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+	<link href="{% static 'css/bootstrap-theme.min.css' %}" rel="stylesheet">
+	<script src="{% static 'js/bootstrap.js' %}"></script>
+	<script src="{% static 'js/vue.js' %}"></script>
+    <title>Title</title>
+</head>
+<body>
+	<div class="area">
+    	<select id="region">
+	    	<option value="">-- Region --</option>
+        		{% for row in area.region %}
+	    		<option value="{{row}}">{{row}}</option>
+				{% endfor %}
+    	</select>
+		<!-- 子select：国 -->
+		<select id="prefecture">
+			<option value="">-- Prefecture --</option>
+				{% for row in area.region_prefecture %}
+				<option value="{{ row.1 }}" data-region="{{ row.0 }}">{{ row.1 }}</option>
+				{% endfor %}
+		</select>
+		<select id="city">
+			<option value="">-- City --</option>
+				{% for row in area.prefecture_city %}
+				<option value="{{ row.1 }}" data-prefecture="{{ row.0 }}">{{ row.1 }}</option>
+				{% endfor %}
+		</select>
+	</div>
+
+	<div class="btn-group buttons" data-toggle="buttons">
+		<label class="btn btn-default">
+			<input class="category" type="checkbox" autocomplete="off" value="high"> 高い
+		</label>
+		<label class="btn btn-default">
+			<input class="category" type="checkbox" autocomplete="off" value="middle"> 普通
+		</label>
+		<label class="btn btn-default">
+			<input class="category" type="checkbox" autocomplete="off" value="low"> 安い
+		</label>
+	</div>
+
+	<div id="myGrid" style="width:800px;height:400px;"></div>
+
+	<script src="{% static 'js/slick.core.js' %}"></script>
+	<script src="{% static 'js/slick.grid.js' %}"></script>
+	<script src="{% static 'js/slick.editors.js' %}"></script>
+
+    <script src="{% static 'js/table.js' %}"></script>
+	<script src="{% static 'js/filter.js' %}"></script>
+</body>
+</html>
